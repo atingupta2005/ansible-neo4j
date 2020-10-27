@@ -74,9 +74,6 @@
         group: root
         mode: '0777'
  
-- name: Setup Users and Groups
-  hosts: neo4jservers
-  become: yes
     - name: Create Group
       shell:
         cmd: addgroup --gid 7474 --system neo4j
