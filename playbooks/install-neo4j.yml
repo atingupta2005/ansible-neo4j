@@ -25,7 +25,7 @@
       user:
         name: neo4j
         state: present
-        gid: 7474
+        uid: 7474
         system: yes
         create_home: no
         group: neo4j
