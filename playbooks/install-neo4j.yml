@@ -86,9 +86,6 @@
     - name: Install Neo4J - Make Links
       shell:
         cmd: ln -s /data "${NEO4J_HOME}"/data && ln -s /logs "${NEO4J_HOME}"/logs
-    - name: Setup Permissions
-      shell:
-        cmd: sudo chown -R neo4j:neo4j /data && sudo chmod -R 777 /data && sudo chown -R neo4j:neo4j /logs && sudo chmod -R 777 /logs && sudo chown -R neo4j:neo4j "${NEO4J_HOME}" && sudo chmod -R 777 "${NEO4J_HOME}"
     - name: Setup GIT
       shell:
         cmd: git config --global user.name `hostname` && git config --global user.email `hostname`@mail.com
@@ -103,13 +100,14 @@
         owner: atin
         group: atin
         mode: '0777'
-    - name: Copy restart-neo4j.sh
+    - name: Copy neo4j-env-vars.sh
       copy:
         src: neo4j-env-vars.sh
         dest: /etc/profile.d/neo4j-env-vars.sh
         owner: root
         group: root
         mode: '0777'
-
-
-  
+    - name: Setup Permissions
+      shell:
+        cmd: sudo chown -R neo4j:neo4j /data && sudo chmod -R 777 /data && sudo chown -R neo4j:neo4j /logs && sudo chmod -R 777 /logs && sudo chown -R neo4j:neo4j "${NEO4J_HOME}" && sudo chmod -R 777 "${NEO4J_HOME}"
+        
