@@ -34,25 +34,27 @@
         dest: /var/lib
         remote_src: yes
 
-    - name: Copy Neo4J Data and Log Directories to /data and /logs
     - copy:
         src: /var/lib/neo4j-enterprise-4.1.3-unix
         dest: ${NEO4J_HOME}
         owner: neo4j
         group: neo4j
         mode: 0777
+        remote_src: yes
     - copy:
         src: ${NEO4J_HOME}/data
         dest: /data
         owner: neo4j
         group: neo4j
         mode: 0777
+        remote_src: yes
     - copy:
         src: ${NEO4J_HOME}/logs
         dest: /logs
         owner: neo4j
         group: neo4j
         mode: 0777
+        remote_src: yes
     - name: Install Neo4J
       shell:
         cmd: sudo rm -rf "${NEO4J_HOME}"/data && sudo rm -rf "${NEO4J_HOME}"/logs
