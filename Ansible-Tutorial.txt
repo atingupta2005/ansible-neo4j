@@ -1,0 +1,91 @@
+ansible –version
+
+sudo apt -y install software-properties-common
+sudo apt-add-repository ppa:ansible/ansible
+sudo apt update
+sudo apt install ansible
+
+ansible –version
+
+#Ansible config file
+cat vim /etc/ansible/ansible.cfg
+
+ansible_python_interpreter=/usr/bin/python3
+
+#Ansible Inventory file
+cat /etc/ansible/hosts
+
+#Modify /etc/sudoers to allow your selected user to sudo any cmd w/o a password for most automated config using the line:
+#sudo vim /etc/sudoers
+#	ansible ALL=(ALL) NOPASSWD: ALL
+
+ssh-keygen
+
+ls ~/.ssh
+
+#After the public key of our Ansible server is generated, we have to copy it to the nodes, using this command:
+ssh-copy-id -i <username>@<IP address of our node machine>
+
+ssh -i ~/.ssh/id_rsa <username>@<IP address of our node machine>
+
+mkdir ~/ansible-project
+cp /etc/ansible/hosts ~/ansible-project/inventory.ini
+vim ~/ansible-project/inventory.ini
+	[neo4jservers]
+	atingupta-20201027-vm1.eastus.cloudapp.azure.com
+	atingupta-20201027-vm2.eastus.cloudapp.azure.com
+	atingupta-20201027-vm3.eastus.cloudapp.azure.com
+	atingupta-20201027-vm4.eastus.cloudapp.azure.com
+	atingupta-20201027-vm5.eastus.cloudapp.azure.com
+
+	[neo4jservers:vars]
+	ansible_python_interpreter=/usr/bin/python3
+	ansible_user=atin
+	ansible_ssh_private_key_file = ~/.ssh/id_rsa
+	ansible_connection=ssh
+	ansible_port=22
+	
+:wq
+
+
+ansible all --inventory-file=~/ansible-project/inventory.ini --module-name ping -u atin
+ansible all --inventory-file=~/ansible-project/inventory.ini -a "hostname"
+
+mkdir set-sudoers
+vim set-sudoers/set-sudoers/set_sudoer.yml
+	---
+	- hosts: all
+	  tasks:
+		- lineinfile:
+			path: /etc/sudoers
+			state: present
+			regexp: '^%sudo'
+			line: '%sudo ALL=(ALL) NOPASSWD: ALL'
+			validate: 'visudo -cf %s'
+:we
+
+ansible-playbook -i inventory.ini ./set-sudoers/set_sudoer.yml -b -K
+
+mkdir playbooks
+
+vim playbooks/install-neo4j.yml
+---
+- name: InstallNeo4J
+  hosts: neo4jservers
+  become: yes
+  tasks:
+   - name: Install Neo4J
+     apt:
+       name: nano
+       state: latest
+
+
+:wq
+
+
+ansible-playbook --inventory-file=~/ansible-project/inventory.ini playbooks/install-neo4j.yml
+
+
+
+
+
