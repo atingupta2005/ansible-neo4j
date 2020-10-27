@@ -14,6 +14,23 @@
       apt:
         update_cache: yes
 
+    - name: Ensure group "neo4j" exists
+      group:
+        name: neo4j
+        state: present
+        gid: 7474
+        system: yes
+    
+    - name: Ensure user "neo4j" exists
+      user:
+        name: neo4j
+        state: present
+        gid: 7474
+        system: yes
+        create_home: no
+        group: neo4j
+
+
     - name: Install OpenJDK and other tools
       apt:
         pkg:
@@ -84,9 +101,4 @@
         group: atin
         mode: '0777'
  
-    - name: Create Group
-      shell:
-        cmd: addgroup --gid 7474 --system neo4j
-    - name: Create User
-      shell:
-        cmd: adduser --uid 7474 --system --no-create-home --home "${NEO4J_HOME}" --ingroup neo4j neo4j
+        
