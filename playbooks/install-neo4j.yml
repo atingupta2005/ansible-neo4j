@@ -33,6 +33,7 @@
         src: https://dist.neo4j.org/neo4j-enterprise-4.1.3-unix.tar.gz
         dest: /var/lib
         remote_src: yes
+        force: yes
 
     - copy:
         src: /var/lib/neo4j-enterprise-4.1.3
@@ -41,6 +42,7 @@
         group: neo4j
         mode: 0777
         remote_src: yes
+        force: yes
     - copy:
         src: ${NEO4J_HOME}/data
         dest: /data
@@ -48,6 +50,7 @@
         group: neo4j
         mode: 0777
         remote_src: yes
+        force: yes
     - copy:
         src: ${NEO4J_HOME}/logs
         dest: /logs
@@ -55,6 +58,7 @@
         group: neo4j
         mode: 0777
         remote_src: yes
+        force: yes
     - name: Install Neo4J
       shell:
         cmd: sudo rm -rf "${NEO4J_HOME}"/data && sudo rm -rf "${NEO4J_HOME}"/logs
