@@ -1,0 +1,9 @@
+---
+- name: InstallNeo4J
+  hosts: neo4jservers
+  become: yes
+  tasks:
+   - name: Install Neo4J
+     apt:
+       name: nano
+       state: latest
