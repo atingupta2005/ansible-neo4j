@@ -2,8 +2,63 @@
 - name: InstallNeo4J
   hosts: neo4jservers
   become: yes
+  environment:
+    NEO4J_HOME: /var/lib/neo4j
+
   tasks:
-   - name: Install Neo4J
-     apt:
-       name: nano
-       state: latest
+    - name: Update all packages to the latest version
+      apt:
+        upgrade: dist
+
+    - name: Run the equivalent of "apt-get update" as a separate step
+      apt:
+        update_cache: yes
+
+    - name: Install OpenJDK and other tools
+      apt:
+        pkg:
+        - curl
+        - wget
+        - gosu
+        - jq
+        - htop
+        - tree
+        - vim
+        - openjdk-11-jdk
+        state: present
+        install_recommends: no
+    - name: Create Group
+      shell:
+        cmd: addgroup --gid 7474 --system neo4j
+    - name: Create User
+      shell:
+        cmd: adduser --uid 7474 --system --no-create-home --home "${NEO4J_HOME}" --ingroup neo4j neo4j
+    - name: Download Neo4J
+      shell:
+        cmd: wget https://dist.neo4j.org/neo4j-enterprise-4.1.3-unix.tar.gz
+    - name: Extract Neo4J
+      shell:
+        cmd: sudo tar --extract --file neo4j-enterprise-4.1.3-unix.tar.gz --directory /var/lib
+    - name: Install Neo4J
+      shell:
+        cmd: sudo mv /var/lib/neo4j-* "${NEO4J_HOME}" && sudo mv "${NEO4J_HOME}"/data /data && sudo mv "${NEO4J_HOME}"/logs /logs
+    - name: Install Neo4J - Change Ownership
+      shell:
+        cmd: sudo chown -R neo4j:neo4j /data && sudo chmod -R 777 /data && sudo chown -R neo4j:neo4j /logs && sudo chmod -R 777 /logs && sudo chown -R neo4j:neo4j "${NEO4J_HOME}" && sudo chmod -R 777 "${NEO4J_HOME}"
+    - name: Install Neo4J - Make Links
+      shell:
+        cmd: ln -s /data "${NEO4J_HOME}"/data && ln -s /logs "${NEO4J_HOME}"/logs
+    - name: Setup GIT
+      shell:
+        cmd: git config --global user.name `hostname` && git config --global user.email `hostname`@mail.com
+    - name: Commit Cofig to GIT
+      shell:
+        cmd: cd $NEO4J_HOME/conf && git init && git add * && git commit -am "-"
+
+    - name: Copy restart-neo4j.sh
+      copy:
+        src: ./resources/restart-neo4j.sh
+        dest: ~/restart-neo4j.sh
+        owner: atingupta2005
+        group: root
+        mode: '0777'
