@@ -27,6 +27,7 @@ ls ~/.ssh
 ssh-copy-id -i <username>@<IP address of our node machine>
 
 ssh -i ~/.ssh/id_rsa <username>@<IP address of our node machine>
+	- ssh atin@atingupta-20201027-vm1.eastus.cloudapp.azure.com
 
 mkdir ~/ansible-project
 cp /etc/ansible/hosts ~/ansible-project/inventory.ini
@@ -87,5 +88,5 @@ ansible-playbook --inventory-file=~/ansible-project/inventory.ini playbooks/inst
 
 
 
-
+ssh atin@atingupta-20201027-vm1.eastus.cloudapp.azure.com
 
