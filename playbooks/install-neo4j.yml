@@ -28,6 +28,10 @@
         state: present
         install_recommends: no
 
+    - name: Remove Neo4J
+      shell:
+        cmd: sudo rm -rf "${NEO4J_HOME}" /var/lib/neo4j-enterprise-4.1.3-unix.tar.gz  /data /logs
+
     - name: Download and Install Neo4J
       unarchive:
         src: https://dist.neo4j.org/neo4j-enterprise-4.1.3-unix.tar.gz
@@ -59,7 +63,7 @@
         mode: 0777
         remote_src: yes
         force: yes
-    - name: Install Neo4J
+    - name: Install Neo4J - Remove /data and /logs from NEO4J_HOME
       shell:
         cmd: sudo rm -rf "${NEO4J_HOME}"/data && sudo rm -rf "${NEO4J_HOME}"/logs
     - name: Install Neo4J - Make Links
