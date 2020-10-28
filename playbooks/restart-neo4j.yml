@@ -13,7 +13,7 @@
 
     - name: Pause for 20 sec
       pause:
-      seconds: 20
+       seconds: 20
 
     - name: Start Neo4J
       shell:
