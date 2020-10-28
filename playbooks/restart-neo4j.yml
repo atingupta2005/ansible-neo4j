@@ -10,9 +10,9 @@
       shell:
         cmd: /var/lib/neo4j/bin/neo4j stop
 
-    - pause:
-        prompt: "Taking pause of 20 seconds"
-        seconds: 20
+    - name: wait
+      command: sleep 30
+      throttle: 1
 
     - name: Start Neo4J
       shell:
