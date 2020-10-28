@@ -21,7 +21,6 @@
         group: neo4j
         mode: '0777'
         recurse: yes
-        ignore_errors: yes
 
     - name: Stop Neo4J
       shell:
