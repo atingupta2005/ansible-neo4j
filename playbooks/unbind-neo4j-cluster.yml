@@ -14,20 +14,30 @@
       shell:
         cmd: /var/lib/neo4j/bin/neo4j-admin unbind
 
-    - name: Remove /data
+    - name: Remove /data/databases
       file:
-        path: /data
+        path: /data/databases
         state: absent
 
-    - name: Create /data
+    - name: Remove /data/transactions
       file:
-        path: /data
-        state: present
+        path: /data/transactions
+        state: absent
+
+    - name: Remove /var/lib/neo4j/data
+      file:
+        path: /var/lib/neo4j/data
+        state: absent
+
+    - name: Create /var/lib/neo4j/data
+      file:
+        path: /var/lib/neo4j/data
+        state: directory
 
     - name: Install Neo4J - Make Links
       file:
         src: /data
-        dest: $NEO4J_HOME/data
+        dest: /var/lib/neo4j/data
         owner: neo4j
         group: neo4j
         state: link
@@ -39,6 +49,15 @@
         group: neo4j
         mode: '0777'
         recurse: yes
+
+    - name: Change file ownership, group and permissions - /var/lib/neo4j
+      file:
+        path: /var/lib/neo4j
+        owner: neo4j
+        group: neo4j
+        mode: '0777'
+        recurse: yes
+
 
     - name: List /data
       find:
