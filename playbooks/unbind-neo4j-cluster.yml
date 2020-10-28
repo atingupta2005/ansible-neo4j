@@ -69,6 +69,7 @@
         group: neo4j
         mode: '0777'
         recurse: yes
+        ignore_errors: yes
 
     - name: Change file ownership, group and permissions - /var/lib/neo4j
       file:
