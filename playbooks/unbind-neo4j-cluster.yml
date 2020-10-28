@@ -63,14 +63,6 @@
         group: neo4j
         state: link
 
-    - name: Change file ownership, group and permissions - /data
-      file:
-        path: /data
-        owner: neo4j
-        group: neo4j
-        mode: '0777'
-        recurse: yes
-
     - name: Change file ownership, group and permissions - /var/lib/neo4j
       file:
         path: /var/lib/neo4j
