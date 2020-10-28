@@ -40,6 +40,11 @@
         path: /data/transactions
         state: absent
 
+    - name: Remove /data
+      file:
+        path: /data
+        state: absent
+
     - name: Remove /var/lib/neo4j/data
       file:
         path: /var/lib/neo4j/data
