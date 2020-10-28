@@ -1,7 +1,6 @@
 ---
 - name: Unbind Neo4J Cluster
   hosts: neo4jservers
-  become: yes
   environment:
     NEO4J_HOME: /var/lib/neo4j
 
