@@ -1,0 +1,15 @@
+ansible --inventory-file=~/ansible-project/inventory.ini -a "/var/lib/neo4j/bin/neo4j stop" neo4jservers
+
+ansible --inventory-file=~/ansible-project/inventory.ini -a "tail -n 20 /var/lib/neo4j/conf/neo4j.conf" neo4jservers
+
+ansible --inventory-file=~/ansible-project/inventory.ini -a "/var/lib/neo4j/bin/neo4j start" neo4jservers
+
+ansible --inventory-file=~/ansible-project/inventory.ini -a "/var/lib/neo4j/bin/neo4j stop" neo4jservers
+
+ansible --inventory-file=~/ansible-project/inventory.ini -a "/var/lib/neo4j/bin/neo4j-admin unbind" neo4jservers
+
+ansible --inventory-file=~/ansible-project/inventory.ini -a "sudo rm -rf /data/*" neo4jservers
+
+ansible --inventory-file=~/ansible-project/inventory.ini -a "ls -al /data/" neo4jservers
+
+ansible-playbook --inventory-file=~/ansible-project/inventory.ini playbooks/unbind-neo4j-cluster.yml
