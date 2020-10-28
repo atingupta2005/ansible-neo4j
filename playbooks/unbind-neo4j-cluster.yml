@@ -19,6 +19,11 @@
         path: /data
         state: absent
 
+    - name: Create /data
+      file:
+        path: /data
+        state: present
+
     - name: Install Neo4J - Make Links
       file:
         src: /data
