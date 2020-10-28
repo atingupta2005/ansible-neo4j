@@ -24,11 +24,11 @@
 
     - name: Stop Neo4J
       shell:
-        cmd: /var/lib/neo4j/bin/neo4j stop
+        cmd: /var/lib/neo4j/bin/neo4j stop | cat
 
     - name: Unbind from Cluster
       shell:
-        cmd: /var/lib/neo4j/bin/neo4j-admin unbind
+        cmd: /var/lib/neo4j/bin/neo4j-admin unbind | cat
 
     - name: Remove /data/databases
       file:
