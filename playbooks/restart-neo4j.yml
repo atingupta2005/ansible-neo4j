@@ -1,6 +1,7 @@
 ---
 - name: Restart Neo4J
   hosts: neo4jservers
+  serial: 1
   become_user: neo4j
   environment:
     NEO4J_HOME: /var/lib/neo4j
@@ -10,9 +11,9 @@
       shell:
         cmd: /var/lib/neo4j/bin/neo4j stop
 
-    - name: wait
-      command: sleep 30
-      throttle: 1
+    - name: Pause for 20 sec
+      pause:
+      seconds: 20
 
     - name: Start Neo4J
       shell:
