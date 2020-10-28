@@ -1,0 +1,44 @@
+---
+- name: Unbind Neo4J Cluster
+  hosts: neo4jservers
+  become: yes
+  environment:
+    NEO4J_HOME: /var/lib/neo4j
+
+  tasks:
+    - name: Stop Neo4J
+      shell:
+        cmd: neo4j stop
+
+    - name: Unbind from Cluster
+      shell:
+        cmd: neo4j-admin unbind
+
+    - name: Remove /data
+      file:
+        path: /data
+        state: absent
+
+    - name: Install Neo4J - Make Links
+      file:
+        src: /data
+        dest: $NEO4J_HOME/data
+        owner: neo4j
+        group: neo4j
+        state: link
+
+    - name: Change file ownership, group and permissions - /data
+      file:
+        path: /data
+        owner: neo4j
+        group: neo4j
+        mode: '0777'
+        recurse: yes
+
+    - name: List /data
+      find:
+        paths: /data
+    
+    - name: Start Neo4J
+      shell:
+        cmd: restart-neo4j.sh
