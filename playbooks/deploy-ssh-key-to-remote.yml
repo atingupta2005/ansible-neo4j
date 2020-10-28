@@ -1,5 +1,5 @@
 ---
-- hosts: all
+- hosts: neo4jservers
   remote_user: atin
   tasks:
     # upload ssh key
