@@ -69,6 +69,3 @@
       find:
         paths: /data
     
-    - name: Start Neo4J
-      shell:
-        cmd: /var/lib/neo4j/bin/neo4j start
