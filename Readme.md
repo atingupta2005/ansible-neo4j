@@ -31,5 +31,5 @@
 # Install Neo4J
  - ansible-playbook --inventory-file=~/ansible-project/inventory.ini playbooks/install-neo4j.yml
 
-# Reset Cluster
+# Reset Cluster - Not working
  - ansible-playbook --inventory-file=~/ansible-project/inventory.ini playbooks/unbind-neo4j-cluster.yml
