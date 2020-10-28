@@ -8,11 +8,11 @@
   tasks:
     - name: Stop Neo4J
       shell:
-        cmd: neo4j stop
+        cmd: /var/lib/neo4j/bin/neo4j stop
 
     - name: Unbind from Cluster
       shell:
-        cmd: neo4j-admin unbind
+        cmd: /var/lib/neo4j/bin/neo4j-admin unbind
 
     - name: Remove /data
       file:
@@ -41,4 +41,4 @@
     
     - name: Start Neo4J
       shell:
-        cmd: restart-neo4j.sh
+        cmd: /var/lib/neo4j/bin/restart-neo4j.sh
