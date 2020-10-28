@@ -52,8 +52,8 @@
 
     - name: Install Neo4J - Make Links
       file:
-        src: /data
-        dest: /var/lib/neo4j/data
+        src: /var/lib/neo4j/data
+        dest: /data
         owner: neo4j
         group: neo4j
         state: link
