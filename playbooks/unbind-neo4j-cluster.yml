@@ -29,7 +29,6 @@
     - name: Unbind from Cluster
       shell:
         cmd: /var/lib/neo4j/bin/neo4j-admin unbind
-        ignore_errors: yes
 
     - name: Remove /data/databases
       file:
