@@ -70,4 +70,4 @@
     
     - name: Start Neo4J
       shell:
-        cmd: /var/lib/neo4j/bin/restart-neo4j.sh
+        cmd: /var/lib/neo4j/bin/neo4j start
