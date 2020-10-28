@@ -19,3 +19,5 @@ ansible-playbook --inventory-file=~/ansible-project/inventory.ini playbooks/unbi
 ansible --inventory-file=~/ansible-project/inventory.ini -a "tail -n 20 /logs/debug.log" neo4jservers
 
 ansible --inventory-file=~/ansible-project/inventory.ini -a "curl localhost:7474" neo4jservers
+
+ansible --inventory-file=~/ansible-project/inventory.ini -a "/var/lib/neo4j/bin/neo4j stop && /var/lib/neo4j/bin/neo4j-admin unbind" neo4jservers
