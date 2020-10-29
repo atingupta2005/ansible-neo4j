@@ -41,6 +41,9 @@
   - cd ..		# Move back to parent folder
 # Install Neo4J Cluster
  - ansible-playbook  playbooks/4-cluster-install-neo4j.yml --check
+ 
+ - Confirm if configuration done:
+   ansible  -a "tail -n 45 /var/lib/neo4j/conf/neo4j.conf" neo4jservers
 
 # Restart Cluster
  - ansible-playbook  playbooks/5-restart-neo4j.yml --check
