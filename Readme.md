@@ -11,65 +11,75 @@
  - chmod 0600 ~/.ssh/neo4j_id_rsa
 
 # Update Hosts:
- - vim inventory.ini
+ - vim hosts
 
 # Update SSH Key File Path:
- - vim inventory.ini
+ - vim hosts
 
 # Deploy Public Key to all hosts
- - ansible-playbook -i inventory.ini playbooks/1-deploy-ssh-key-to-remote.yml --ask-pass
+ - ansible-playbook playbooks/1-deploy-ssh-key-to-remote.yml --ask-pass --check
 
 # Test the key
  - ssh -i ~/.ssh/neo4j_id_rsa <username>@<hostname>
 
 # Test Ansible is able to conenct to all hosts
- - ansible all --inventory-file=inventory.ini --module-name ping -u atin
+ - ansible all  --module-name ping -u atin
 
 # Set Sudoers
- - ansible-playbook -i inventory.ini playbooks/2-set_sudoer.yml -b -K
+ - ansible-playbook playbooks/2-set_sudoer.yml -b -K
 
 # Install Neo4J
- - ansible-playbook --inventory-file=inventory.ini playbooks/3-install-neo4j.yml
+ - ansible-playbook  playbooks/3-install-neo4j.yml
+
+# Prepare Neo4J Cluster Config
+ - cd prepare-neo4j-cluster-config
+ - chmod a+x neo4j.conf.inc.sh
+ - vim neo4j.conf.inc.sh
+	#Update host names
+ - ./neo4j.conf.inc.sh
+ #Note many Configuration files each for a host will be created.
+ #It will copy all these newly created files and paste in "../playbooks/files/neo4j-config" folder
 
 # Install Neo4J Cluster
- - ansible-playbook --inventory-file=inventory.ini playbooks/4-cluster install-neo4j.yml
+ - ansible-playbook  playbooks/4-cluster install-neo4j.yml --check
 
 # Restart Cluster
- - ansible-playbook --inventory-file=inventory.ini playbooks/5-restart-neo4j.yml
+ - ansible-playbook  playbooks/5-restart-neo4j.yml --check
 
 # Stop Cluster
- - ansible-playbook --inventory-file=inventory.ini playbooks/6-stop-neo4j.yml
+ - ansible-playbook  playbooks/6-stop-neo4j.yml --check
 
 # Reset Cluster - Not working
- - ansible-playbook --inventory-file=inventory.ini playbooks/7-unbind-neo4j-cluster.yml
+ - ansible-playbook  playbooks/7-unbind-neo4j-cluster.yml --check
  
  
 # Other Usefull Commands:
-ansible all -i 'vm1,' -m ping -u ubuntu    # Run command on specific host using host aliases
-ansible all -i 'vm1,' -m ping -u ubuntu    # Run command on specific host using host aliases
+ansible all -i 'vm1,' -m ping -u ubuntu   --check   # Run command on specific host using host aliases
+ansible all -i 'vm1,' -m ping -u ubuntu    --check  # Run command on specific host using host aliases
 
-ansible-playbook --inventory-file=inventory.ini playbooks/6-stop-neo4j.yml --limit "vm1,vm2"  # Run playbook on limited hosts using host aliases
+#Run playbook on limited hosts using host aliases
+ansible-playbook  playbooks/6-stop-neo4j.yml --limit "vm1,vm2"   --check
 
-ansible --inventory-file=inventory.ini -a "/var/lib/neo4j/bin/neo4j stop" neo4jservers --limit "host1,host2"
+ansible  -a "/var/lib/neo4j/bin/neo4j stop" neo4jservers --limit "host1,host2"  --check
 
-ansible --inventory-file=inventory.ini -a "tail -n 20 /var/lib/neo4j/conf/neo4j.conf" neo4jservers
+ansible  -a "tail -n 20 /var/lib/neo4j/conf/neo4j.conf" neo4jservers  --check
 
-ansible --inventory-file=inventory.ini -a "/var/lib/neo4j/bin/neo4j start" neo4jservers
+ansible  -a "/var/lib/neo4j/bin/neo4j start" neo4jservers  --check
 
-ansible --inventory-file=inventory.ini -a "/var/lib/neo4j/bin/neo4j status" neo4jservers
+ansible  -a "/var/lib/neo4j/bin/neo4j status" neo4jservers  --check
 
-ansible --inventory-file=inventory.ini -a "/var/lib/neo4j/bin/neo4j stop" neo4jservers
+ansible  -a "/var/lib/neo4j/bin/neo4j stop" neo4jservers  --check
 
-ansible --inventory-file=inventory.ini -a "/var/lib/neo4j/bin/neo4j-admin unbind" neo4jservers
+ansible  -a "/var/lib/neo4j/bin/neo4j-admin unbind" neo4jservers  --check
 
-ansible --inventory-file=inventory.ini -a "sudo rm -rf /data/*" neo4jservers
+ansible  -a "sudo rm -rf /data/*" neo4jservers  --check
 
-ansible --inventory-file=inventory.ini -a "ls -al /data/" neo4jservers
+ansible  -a "ls -al /data/" neo4jservers  --check
 
-ansible-playbook --inventory-file=inventory.ini playbooks/unbind-neo4j-cluster.yml
+ansible-playbook  playbooks/unbind-neo4j-cluster.yml  --check
 
-ansible --inventory-file=inventory.ini -a "tail -n 20 /logs/debug.log" neo4jservers
+ansible  -a "tail -n 20 /logs/debug.log" neo4jservers  --check
 
-ansible --inventory-file=inventory.ini -a "curl localhost:7474" neo4jservers
+ansible  -a "curl localhost:7474" neo4jservers  --check
 
-ansible --inventory-file=inventory.ini -a "/var/lib/neo4j/bin/neo4j stop && /var/lib/neo4j/bin/neo4j-admin unbind" neo4jservers
+ansible  -a "/var/lib/neo4j/bin/neo4j stop && /var/lib/neo4j/bin/neo4j-admin unbind" neo4jservers  --check

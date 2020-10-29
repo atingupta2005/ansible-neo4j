@@ -32,11 +32,11 @@ ssh -i ~/.ssh/neo4j_id_rsa <username>@<IP address of our node machine>
 
 
 mkdir ~/ansible-project
-cp /etc/ansible/hosts ~/ansible-project/inventory.ini
+cp /etc/ansible/hosts ~/ansible-project/hosts
 
 #Update Hosts:
 #Update SSH Key File Path:
-vim ~/ansible-project/inventory.ini
+vim hosts
 	[neo4jservers]
 	atingupta-20201027-vm1.eastus.cloudapp.azure.com
 	atingupta-20201027-vm2.eastus.cloudapp.azure.com
@@ -68,16 +68,17 @@ vim playbooks/deploy-ssh-key-to-remote.yml
 # vim:ft=ansible:
 :wq
 
-vim ansible.cfg
+vim ansible.cfg		# Change or add below lines
 	[defaults]
 	host_key_checking = False
+	inventory      = hosts
 :wq
 
-ansible-playbook -i ~/ansible-project/inventory.ini playbooks/deploy-ssh-key-to-remote.yml --ask-pass
+ansible-playbook playbooks/deploy-ssh-key-to-remote.yml --ask-pass
 
 
-ansible all --inventory-file=~/ansible-project/inventory.ini --module-name ping -u atin
-ansible all --inventory-file=~/ansible-project/inventory.ini -a "hostname"
+ansible all  --module-name ping -u atin
+ansible all  -a "hostname"
 
 #Make Sudoers access on all Remote VMs
 cd ~/ansible-project
@@ -94,7 +95,7 @@ vim set-sudoers/set-sudoers/set_sudoer.yml
 			validate: 'visudo -cf %s'
 :we
 
-ansible-playbook -i inventory.ini ./set-sudoers/set_sudoer.yml -b -K
+ansible-playbook  ./set-sudoers/set_sudoer.yml -b -K
 
 mkdir playbooks
 
@@ -103,4 +104,4 @@ vim playbooks/install-neo4j.yml
 
 
 #Install Neo4J on All Remote VMs
-ansible-playbook --inventory-file=~/ansible-project/inventory.ini playbooks/install-neo4j.yml
+ansible-playbook  playbooks/install-neo4j.yml
