@@ -43,10 +43,16 @@
  - ansible-playbook  playbooks/4-cluster-install-neo4j.yml --check
  
  - Confirm if configuration done:
-   ansible  -a "tail -n 45 /var/lib/neo4j/conf/neo4j.conf" neo4jservers
+   ansible  -a "tail -n 30 /var/lib/neo4j/conf/neo4j.conf" neo4jservers
 
 # Restart Cluster
- - ansible-playbook  playbooks/5-restart-neo4j.yml --check
+ - ansible  -a "/var/lib/neo4j/bin/neo4j start" neo4jservers 
+ - ansible  -a "/var/lib/neo4j/bin/neo4j status" neo4jservers 
+
+# Check Logs
+ - ansible  -a "tail -n 20 /logs/debug.log" neo4jservers
+
+# Login to the node using browser
 
 # Stop Cluster
  - ansible-playbook  playbooks/6-stop-neo4j.yml --check
