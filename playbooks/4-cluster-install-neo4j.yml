@@ -18,7 +18,7 @@
 
     - name: Working for {{ inventory_hostname }}
       assemble:
-       src: '{{ inventory_hostname }}.inc.neo4j.conf'
+       src: 'neo4j-config/{{ inventory_hostname }}'
        dest: ${NEO4J_HOME}/conf/neo4j.conf
        delimiter: '### Cluster Configuration ###'
        backup: yes

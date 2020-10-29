@@ -31,13 +31,15 @@
 
 # Prepare Neo4J Cluster Config
  - cd prepare-neo4j-cluster-config
- - chmod a+x neo4j.conf.inc.sh
+ - chmod a+x neo4j.conf.inc.sh && ls
+ - rm *.inc.neo4j.conf && ls
  - vim neo4j.conf.inc.sh
 	#Update host names
  - ./neo4j.conf.inc.sh
  #Note many Configuration files each for a host will be created.
  #It will copy all these newly created files and paste in "../playbooks/files/neo4j-config" folder
-
+  - ls ../playbooks/files/neo4j-config
+  - cd ..		# Move back to parent folder
 # Install Neo4J Cluster
  - ansible-playbook  playbooks/4-cluster-install-neo4j.yml --check
 

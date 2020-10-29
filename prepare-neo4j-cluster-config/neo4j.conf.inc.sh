@@ -16,15 +16,19 @@ for host in ${StringArray[@]}; do
    hostfilename=vm$i.inc.neo4j.conf
    echo $hostfilename
    rm -rf $hostfilename
+   
    cp neo4j.conf.template.txt $hostfilename
    
    sed -i "s/<hostname>/$host/g" $hostfilename
    sed -i "s/<allhostnames>/$all_hosts/g" $hostfilename
    
+   mkdir -p ../playbooks/files/neo4j-config/vm$i
+   cp $hostfilename ../playbooks/files/neo4j-config/vm$i
+   
    ((i=i+1))
 done
 
-cp *.neo4j.conf ../playbooks/files/neo4j-config
+
 
 # cp neo4j.conf.template.txt neo4j.conf.inc.vm1.txt
 # sed -i 's/<hostname>/hostname_vm1/g' neo4j.conf.inc.vm1.txt
