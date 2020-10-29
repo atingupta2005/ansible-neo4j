@@ -1,0 +1,11 @@
+---
+- hosts: neo4jservers
+  remote_user: atin
+  tasks:
+    # upload ssh key                
+    - authorized_key:
+        user: atin
+        state: present
+        manage_dir: yes
+        key: "{{ lookup('file', '~/.ssh/neo4j_id_rsa.pub') }}"
+# vim:ft=ansible:

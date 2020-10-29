@@ -8,12 +8,18 @@
   tasks:
     - name: "Ansible | Print File Names"
       debug:
-        msg: '{{ inventory_hostname }}.inc.neo4j.conf' - '${NEO4J_HOME}/conf/neo4j.conf'
-           
+        msg: '{{ inventory_hostname }}.inc.neo4j.conf'
+
+    - name: "Ansible | Print File Names"
+      debug:
+        msg: ${NEO4J_HOME}/conf/neo4j.conf
+
+
+
     - name: Working for {{ inventory_hostname }}
       assemble:
-       src: '{{ inventory_hostname }}.inc.neo4j.conf'
-       dest: '${NEO4J_HOME}/conf/neo4j.conf'
+       src: '{{ inventory_hostname }}.neo4j.inc.conf'
+       dest: ${NEO4J_HOME}/conf/neo4j.conf
        delimiter: '### Cluster Configuration ###'
        backup: yes
        remote_src: no
