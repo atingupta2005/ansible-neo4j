@@ -23,7 +23,8 @@ for host in ${StringArray[@]}; do
    sed -i "s/<allhostnames>/$all_hosts/g" $hostfilename
    
    mkdir -p ../playbooks/files/neo4j-config/vm$i
-   cp $hostfilename ../playbooks/files/neo4j-config/vm$i
+   mv $hostfilename ../playbooks/files/neo4j-config/vm$i
+   
    
    ((i=i+1))
 done
