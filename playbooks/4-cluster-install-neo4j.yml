@@ -6,9 +6,10 @@
     NEO4J_HOME: /var/lib/neo4j
 
   tasks:
-    - assemble:
-       src: {{ inventory_hostname }}.inc.neo4j.conf
-       dest: ${NEO4J_HOME}/conf/neo4j.conf
+    - name: Working for {{ inventory_hostname }}
+      assemble:
+       src: '{{ inventory_hostname }}.inc.neo4j.conf'
+       dest: '${NEO4J_HOME}/conf/neo4j.conf'
        delimiter: '### Cluster Configuration ###'
        backup: yes
        remote_src: no
