@@ -18,13 +18,27 @@
 # Ex 2: A collection of hosts belonging to the 'webservers' group
 
 [neo4jservers]
-atingupta-20201028-vm1.eastus.cloudapp.azure.com
-atingupta-20201028-vm2.eastus.cloudapp.azure.com
-atingupta-20201028-vm3.eastus.cloudapp.azure.com
-atingupta-20201028-vm4.eastus.cloudapp.azure.com
-atingupta-20201028-vm5.eastus.cloudapp.azure.com
+vm1 ansible_host=atingupta-20201028-vm1.eastus.cloudapp.azure.com
+vm2 ansible_host=atingupta-20201028-vm2.eastus.cloudapp.azure.com
+vm3 ansible_host=atingupta-20201028-vm3.eastus.cloudapp.azure.com
+vm4 ansible_host=atingupta-20201028-vm4.eastus.cloudapp.azure.com
+vm5 ansible_host=atingupta-20201028-vm5.eastus.cloudapp.azure.com
 
-[neo4jservers:vars]
+[neo4jcoreservers]
+vm1 ansible_host=atingupta-20201028-vm1.eastus.cloudapp.azure.com
+vm2 ansible_host=atingupta-20201028-vm2.eastus.cloudapp.azure.com
+vm3 ansible_host=atingupta-20201028-vm3.eastus.cloudapp.azure.com
+vm4 ansible_host=atingupta-20201028-vm4.eastus.cloudapp.azure.com
+vm5 ansible_host=atingupta-20201028-vm5.eastus.cloudapp.azure.com
+
+[neo4jreadservers]
+vm1 ansible_host=atingupta-20201028-vm7.eastus.cloudapp.azure.com
+
+[neo4jaddoncoreservers]
+vm1 ansible_host=atingupta-20201028-vm6.eastus.cloudapp.azure.com
+
+
+[all:vars]
 ansible_python_interpreter=/usr/bin/python3
 ansible_user=atin
 ansible_ssh_private_key_file = ~/.ssh/neo4j_id_rsa
