@@ -17,19 +17,17 @@
  - vim hosts
 
 # Deploy Public Key to all hosts
+ - rm /home/atingupta2005/.ssh/known_hosts
  - ansible-playbook playbooks/1-deploy-ssh-key-to-remote.yml --ask-pass --check
 
-# Test the key
- - ssh -i ~/.ssh/neo4j_id_rsa <username>@<hostname>
-
 # Test Ansible is able to conenct to all hosts
- - ansible all  --module-name ping -u atin
+ - ansible all  --module-name ping -u atin --check
 
 # Set Sudoers
- - ansible-playbook playbooks/2-set_sudoer.yml -b -K
+ - ansible-playbook playbooks/2-set_sudoer.yml -b -K --check
 
 # Install Neo4J
- - ansible-playbook  playbooks/3-install-neo4j.yml
+ - ansible-playbook  playbooks/3-install-neo4j.yml --check
 
 # Prepare Neo4J Cluster Config
  - cd prepare-neo4j-cluster-config
@@ -41,7 +39,7 @@
  #It will copy all these newly created files and paste in "../playbooks/files/neo4j-config" folder
 
 # Install Neo4J Cluster
- - ansible-playbook  playbooks/4-cluster install-neo4j.yml --check
+ - ansible-playbook  playbooks/4-cluster-install-neo4j.yml --check
 
 # Restart Cluster
  - ansible-playbook  playbooks/5-restart-neo4j.yml --check
