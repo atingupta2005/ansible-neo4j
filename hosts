@@ -42,7 +42,7 @@ vm6 ansible_host=ag-20201030-vm6.eastus.cloudapp.azure.com
 
 [all:vars]
 ansible_python_interpreter=/usr/bin/python3
-ansible_user=atin
+ansible_user=traininguser
 ansible_ssh_private_key_file = ~/.ssh/neo4j_id_rsa
 ansible_connection=ssh
 ansible_port=22

@@ -28,7 +28,7 @@ ssh-copy-id -i <username>@<IP address of our node machine>
 
 #Test the key
 ssh -i ~/.ssh/neo4j_id_rsa <username>@<IP address of our node machine>
-	- ssh -i ~/.ssh/neo4j_id_rsa atin@atingupta-20201027-vm1.eastus.cloudapp.azure.com
+	- ssh -i ~/.ssh/neo4j_id_rsa traininguser@atingupta-20201027-vm1.eastus.cloudapp.azure.com
 
 
 mkdir ~/ansible-project
@@ -77,7 +77,7 @@ vim ansible.cfg		# Change or add below lines
 ansible-playbook playbooks/deploy-ssh-key-to-remote.yml --ask-pass
 
 
-ansible all  --module-name ping -u atin
+ansible all  --module-name ping -u traininguser
 ansible all  -a "hostname"
 
 #Make Sudoers access on all Remote VMs

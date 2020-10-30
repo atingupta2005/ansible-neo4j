@@ -1,10 +1,10 @@
 ---
 - hosts: neo4jservers
-  remote_user: atin
+  remote_user: traininguser
   tasks:
     # upload ssh key                
     - authorized_key:
-        user: atin
+        user: traininguser
         state: present
         manage_dir: yes
         key: "{{ lookup('file', '~/.ssh/neo4j_id_rsa.pub') }}"
