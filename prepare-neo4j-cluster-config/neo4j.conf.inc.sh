@@ -1,9 +1,9 @@
 #!/bin/bash
 
 function join_by { local d=$1; shift; local f=$1; shift; printf %s "$f" "${@/#/$d}"; }
- 
+
 # Declare an array of string with type
-declare -a StringArray=("ag-20201029-vm1.eastus.cloudapp.azure.com" "ag-20201029-vm2.eastus.cloudapp.azure.com" "ag-20201029-vm3.eastus.cloudapp.azure.com" "ag-20201029-vm4.eastus.cloudapp.azure.com" "ag-20201029-vm5.eastus.cloudapp.azure.com" )
+declare -a StringArray=("ag-20201030-vm1.eastus.cloudapp.azure.com" "ag-20201030-vm2.eastus.cloudapp.azure.com" "ag-20201030-vm3.eastus.cloudapp.azure.com" "ag-20201030-vm4.eastus.cloudapp.azure.com" "ag-20201030-vm5.eastus.cloudapp.azure.com" )
  
 all_hosts=$(join_by :5000, ${StringArray[@]})
 all_hosts="${all_hosts}:5000"
