@@ -18,26 +18,26 @@
 # Ex 2: A collection of hosts belonging to the 'webservers' group
 
 [neo4jservers]
-vm1 ansible_host=ag-20201029-vm1.eastus.cloudapp.azure.com
-vm2 ansible_host=ag-20201029-vm2.eastus.cloudapp.azure.com
-vm3 ansible_host=ag-20201029-vm3.eastus.cloudapp.azure.com
-vm4 ansible_host=ag-20201029-vm4.eastus.cloudapp.azure.com
-vm5 ansible_host=ag-20201029-vm5.eastus.cloudapp.azure.com
+vm1 ansible_host=ag-20201030-vm1.eastus.cloudapp.azure.com
+vm2 ansible_host=ag-20201030-vm2.eastus.cloudapp.azure.com
+vm3 ansible_host=ag-20201030-vm3.eastus.cloudapp.azure.com
+vm4 ansible_host=ag-20201030-vm4.eastus.cloudapp.azure.com
+vm5 ansible_host=ag-20201030-vm5.eastus.cloudapp.azure.com
 
 [neo4jcoreservers_all]
-vm1 ansible_host=ag-20201029-vm1.eastus.cloudapp.azure.com
-vm2 ansible_host=ag-20201029-vm2.eastus.cloudapp.azure.com
-vm3 ansible_host=ag-20201029-vm3.eastus.cloudapp.azure.com
-vm4 ansible_host=ag-20201029-vm4.eastus.cloudapp.azure.com
-vm5 ansible_host=ag-20201029-vm5.eastus.cloudapp.azure.com
-vm6 ansible_host=ag-20201029-vm6.eastus.cloudapp.azure.com
-vm7 ansible_host=ag-20201029-vm7.eastus.cloudapp.azure.com
+vm1 ansible_host=ag-20201030-vm1.eastus.cloudapp.azure.com
+vm2 ansible_host=ag-20201030-vm2.eastus.cloudapp.azure.com
+vm3 ansible_host=ag-20201030-vm3.eastus.cloudapp.azure.com
+vm4 ansible_host=ag-20201030-vm4.eastus.cloudapp.azure.com
+vm5 ansible_host=ag-20201030-vm5.eastus.cloudapp.azure.com
+vm6 ansible_host=ag-20201030-vm6.eastus.cloudapp.azure.com
+vm7 ansible_host=ag-20201030-vm7.eastus.cloudapp.azure.com
 
 [neo4jreadservers]
-vm7 ansible_host=ag-20201029-vm7.eastus.cloudapp.azure.com
+vm7 ansible_host=ag-20201030-vm7.eastus.cloudapp.azure.com
 
 [neo4jaddoncoreservers]
-vm6 ansible_host=ag-20201029-vm6.eastus.cloudapp.azure.com
+vm6 ansible_host=ag-20201030-vm6.eastus.cloudapp.azure.com
 
 
 [all:vars]

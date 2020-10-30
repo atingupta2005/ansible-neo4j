@@ -1,6 +1,6 @@
 ---
 - name: InstallNeo4J
-  hosts: neo4jservers
+  hosts: neo4jreadservers
   become: yes
   environment:
     NEO4J_HOME: /var/lib/neo4j
