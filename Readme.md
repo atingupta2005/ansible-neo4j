@@ -16,9 +16,13 @@
 # Update SSH Key File Path:
  - vim hosts
 
+# Enable Debugging
+ - export ANSIBLE_DEBUG=1 
+ - Add  --verbose
+
 # Deploy Public Key to all hosts
  - rm /home/atingupta2005/.ssh/known_hosts
- - ansible-playbook playbooks/1-deploy-ssh-key-to-remote.yml --ask-pass --check
+ - ansible-playbook playbooks/1-deploy-ssh-key-to-remote.yml --ask-pass --check --verbose
 
 # Test Ansible is able to conenct to all hosts
  - ansible all  --module-name ping -u atin
