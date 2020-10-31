@@ -14,7 +14,8 @@
       debug:
         msg: ${NEO4J_HOME}/conf/neo4j.conf
 
-
+    - name: Generate neo4j increamental configuration locally
+    local_action: cd prepare-neo4j-cluster-config && chmod a+x neo4j.conf.inc.sh ./neo4j.conf.inc.sh && cd ..
 
     - name: Working for {{ inventory_hostname }}
       assemble:
