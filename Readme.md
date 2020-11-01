@@ -25,7 +25,7 @@
  - ansible-playbook playbooks/1-deploy-ssh-key-to-remote.yml --ask-pass --check --verbose
 
 # Test Ansible is able to conenct to all hosts
- - ansible all  --module-name ping -u atin
+ - ansible all  --module-name ping -u traininguser
 
 # Set Sudoers
  - ansible-playbook playbooks/2-set_sudoer.yml -b -K --check
