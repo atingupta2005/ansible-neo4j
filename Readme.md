@@ -33,6 +33,16 @@
 # Install Neo4J
  - ansible-playbook  playbooks/3-install-neo4j.yml --check
 
+# SSH to VMs
+ - ssh -i ~/.ssh/neo4j_id_rsa  traininguser@ag-20201101-vm1.eastus.cloudapp.azure.com
+ 
+# To start standalone server
+ - vim /var/lib/neo4j/conf/neo4j.conf
+    - Uncomment - dbms.default_listen_address=0.0.0.0
+ - neo4j start && neo4j status && tail -n 50 /logs/debug.log && curl localhost:7474
+ 
+
+
 # Prepare Neo4J Cluster Config
  - cd prepare-neo4j-cluster-config
  - chmod a+x neo4j.conf.inc.sh && ls
